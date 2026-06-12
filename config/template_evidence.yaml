@@ -1,0 +1,366 @@
+# Phase 7 - template evidence table.
+# Every stint description in the dataset is one of these 44 templates (Phase 6 finding).
+# Career evidence is scored from this table (exact md5 lookup), regex as fallback for
+# unknown texts. categories: confidence 0-1; applied weights: retrieval .35, rank_eval .25,
+# reco_search .25, ltr .15. Labels are human-reviewed; rationale recorded per template.
+templates:
+  - id: T01
+    md5: 1c8d46642c94c180124a4fd98e7f1dbc
+    count: 25515
+    preview: "Enterprise sales of cloud software solutions into the mid-market segment. Carried a $1.8M ARR quota "
+    categories: {}
+    shipped: false
+    rationale: "Enterprise sales"
+  - id: T02
+    md5: 5468e1b37aa258bb7511bc360b8cd5ce
+    count: 25290
+    preview: "Customer support team lead at a SaaS product. Managed a team of 8 support agents handling tier-1 and"
+    categories: {}
+    shipped: false
+    rationale: "Customer support"
+  - id: T03
+    md5: 03fdb47f3db0ada4d4fe109f5f506a66
+    count: 25237
+    preview: "Marketing leadership role at a B2B SaaS company. Owned the demand-generation function — content mark"
+    categories: {}
+    shipped: false
+    rationale: "B2B marketing"
+  - id: T04
+    md5: 046bc838535d05ec172ab757d49b171b
+    count: 25207
+    preview: "Business analyst at a consulting firm, working primarily with retail and CPG clients. Conducted busi"
+    categories: {}
+    shipped: false
+    rationale: "Consulting business analyst"
+  - id: T05
+    md5: 592133a664e0732245b36cf03689ad5f
+    count: 25164
+    preview: "Brand design and creative direction at a consumer-products company. Owned brand identity (logo, visu"
+    categories: {}
+    shipped: false
+    rationale: "Brand design"
+  - id: T06
+    md5: 2f3df0fbcafdafc794a08bfffa5d6cac
+    count: 25104
+    preview: "Mechanical engineering design role at a hardware-product company. Led the design of two product subs"
+    categories: {}
+    shipped: false
+    rationale: "Mechanical engineering"
+  - id: T07
+    md5: f97cca022153e67aded035cce0f6cfc8
+    count: 25078
+    preview: "Senior accounting role at a mid-sized company — month-end close, financial reporting, statutory comp"
+    categories: {}
+    shipped: false
+    rationale: "Accounting"
+  - id: T08
+    md5: 979634cabf2b883d360a3b3566aac215
+    count: 25071
+    preview: "Content writing and SEO strategy for a tech-focused publication. Wrote longform articles on develope"
+    categories: {}
+    shipped: false
+    rationale: "Content/SEO writing"
+  - id: T09
+    md5: eafc1d27bc209bc78989412b5c5d346c
+    count: 25029
+    preview: "Operations management role at a logistics company. Owned daily fulfillment operations across 3 wareh"
+    categories: {}
+    shipped: false
+    rationale: "Logistics operations"
+  - id: T10
+    md5: 6aefef67e5fa5e668f0c7c3dd42177ac
+    count: 10125
+    preview: "Cloud infrastructure and DevOps work at an enterprise SaaS company. Owned the AWS account architectu"
+    categories: {}
+    shipped: false
+    rationale: "DevOps/cloud infra"
+  - id: T11
+    md5: 053a5257278300dd74c6ea6bf4c6594b
+    count: 10055
+    preview: "Android mobile development using Java and (more recently) Kotlin at a consumer-app company. Built an"
+    categories: {}
+    shipped: false
+    rationale: "Android development"
+  - id: T12
+    md5: e27b840633ad1e975f278e3dbfc859c1
+    count: 10025
+    preview: "Frontend engineering at a media company. React, TypeScript, and the typical surrounding tooling (Web"
+    categories: {}
+    shipped: false
+    rationale: "Frontend engineering"
+  - id: T13
+    md5: 2ce74c9231a7a7a718b243cf9aec6d87
+    count: 10015
+    preview: "Java backend development at a large enterprise — Spring Boot microservices, Kafka for inter-service "
+    categories: {}
+    shipped: false
+    rationale: "Java backend"
+  - id: T14
+    md5: 7625581a90a5d6de6267d46df6d216fc
+    count: 9911
+    preview: "Full-stack web application development at a SaaS company. Built React-based admin interfaces and the"
+    categories: {}
+    shipped: false
+    rationale: "Full-stack web"
+  - id: T15
+    md5: 034c80316b80040928d729d6b168c448
+    count: 9785
+    preview: "Test automation and QA engineering for a fintech product. Built and maintained the end-to-end test s"
+    categories: {}
+    shipped: false
+    rationale: "QA automation"
+  - id: T16
+    md5: d781b13479f3a035f8e945fa0081581b
+    count: 1854
+    preview: "Designed and maintained the analytical data warehouse on Snowflake supporting the BI team's ~50 dash"
+    categories: {}
+    shipped: false
+    rationale: "BI data warehouse"
+  - id: T17
+    md5: d6e790a9dadc7111340090dddbbf4316
+    count: 1836
+    preview: "Built and maintained data pipelines on Apache Airflow processing ~500GB of daily transactional data "
+    categories: {}
+    shipped: false
+    rationale: "Airflow ETL"
+  - id: T18
+    md5: 9a6110aa4623d94b4705d3104515c009
+    count: 1823
+    preview: "Backend + data hybrid role at a growth-stage startup. Built the company's first proper data warehous"
+    categories: {}
+    shipped: false
+    rationale: "Backend+data hybrid"
+  - id: T19
+    md5: 465ba042bd30bc1fc127006efc1302d7
+    count: 1814
+    preview: "Implemented streaming data pipelines on Kafka and Spark Streaming for a real-time user-activity proc"
+    categories: {}
+    shipped: false
+    rationale: "Kafka streaming"
+  - id: T20
+    md5: 79bef887966057883165fef579757516
+    count: 1807
+    preview: "Mixed data science and analytics-engineering role at a marketing-analytics startup. Spent maybe 30% "
+    categories:
+      rank_eval: 0.3
+    shipped: false
+    rationale: "Marketing-analytics A/B testing - generic experimentation, NOT ranking evaluation. Reduces the baseline regex's spurious full credit."
+  - id: T21
+    md5: 177d9c9f73db26e6a1d11c32bf0c994f
+    count: 1790
+    preview: "Backend development with Python (FastAPI), PostgreSQL, and Redis at a B2B SaaS product. Owned the an"
+    categories: {}
+    shipped: false
+    rationale: "Python backend"
+  - id: T22
+    md5: 309629d4c1eab95e2f353a8c09c9a065
+    count: 389
+    preview: "Contributed to ML feature engineering and model deployment for a fraud-detection product. My main ro"
+    categories: {}
+    shipped: false
+    rationale: "ML serving engineer for fraud product - ML-adjacent, no retrieval/ranking"
+  - id: T23
+    md5: aef06dc3f9d402d4a3e722796a6312a5
+    count: 369
+    preview: "Built recommendation-style features at a mid-stage startup — lighter weight than ranking systems at "
+    categories:
+      reco_search: 0.9
+      ltr: 0.5
+    shipped: true
+    rationale: "Production reco features: collaborative filtering + gradient-boosted re-ranking. Self-described 'lighter weight than ranking systems'."
+  - id: T24
+    md5: fcebea7b73518064c900d74fb96f95fb
+    count: 366
+    preview: "Built computer vision models for our product's image moderation feature using PyTorch — fine-tuned R"
+    categories: {}
+    shipped: false
+    rationale: "Computer vision (JD wrong-specialization)"
+  - id: T25
+    md5: f5323920fe5e02d7e9142a5b3aa1f0d8
+    count: 363
+    preview: "Worked on time-series forecasting models for supply-chain demand prediction at a logistics company. "
+    categories: {}
+    shipped: false
+    rationale: "Time-series forecasting"
+  - id: T26
+    md5: 33489e6323ea26a431c11aee358dc0a2
+    count: 359
+    preview: "Worked on customer-facing predictive modeling for an e-commerce platform — churn prediction, convers"
+    categories: {}
+    shipped: false
+    rationale: "Churn/predictive modeling"
+  - id: T27
+    md5: 8b81fb0595987e695ad2abe479380750
+    count: 328
+    preview: "Built NLP pipelines for sentiment analysis and document classification — primarily for an internal f"
+    categories: {}
+    shipped: false
+    rationale: "NLP classification - NLP but not retrieval/ranking"
+  - id: T28
+    md5: 585f0c46add6a76472ae419d0ff15f32
+    count: 78
+    preview: "Owned the ranking layer for an e-commerce search product, evolving it from a hand-tuned scoring func"
+    categories:
+      reco_search: 1.0
+      ltr: 1.0
+      rank_eval: 0.8
+    shipped: true
+    rationale: "Owned e-commerce search ranking layer; hand-tuned -> LTR; relevance labeling pipeline + train/eval workflow."
+  - id: T29
+    md5: 290a0251a899e18d9412151ddf8a6b25
+    count: 65
+    preview: "Trained and shipped multiple ranking models for our product's discovery feed using XGBoost and Light"
+    categories:
+      reco_search: 1.0
+      rank_eval: 1.0
+      ltr: 0.7
+    shipped: true
+    rationale: "Shipped discovery-feed ranking models (XGBoost/LightGBM); owned offline-online correlation analysis - textbook JD must-have."
+  - id: T30
+    md5: 3e643be90703e887e9392d19734bc92a
+    count: 64
+    preview: "Developed a semantic search feature for an internal knowledge base of ~500K documents. Used sentence"
+    categories:
+      retrieval: 1.0
+      rank_eval: 0.7
+      reco_search: 0.8
+    shipped: true
+    rationale: "Semantic search with sentence-transformers + FAISS; query expansion; human relevance judgments vs BM25 baseline."
+  - id: T31
+    md5: bef5d6b0be114421cae7bb69c67e2ffc
+    count: 60
+    preview: "Implemented a RAG-based customer support chatbot integrated with our existing ticketing system. Buil"
+    categories:
+      retrieval: 0.9
+      rank_eval: 0.5
+    shipped: true
+    rationale: "RAG chatbot: embeddings + Pinecone ingestion is real retrieval; eval is generation-quality (BLEU/ROUGE), only partly ranking-eval."
+  - id: T32
+    md5: 9352652f51470a4f30cfd3bc7d42c0b5
+    count: 58
+    preview: "Built a content recommendation system serving 10M+ users that combined collaborative filtering with "
+    categories:
+      reco_search: 1.0
+      retrieval: 0.8
+      rank_eval: 0.9
+      ltr: 0.5
+    shipped: true
+    rationale: "Content reco at 10M+ users: CF + embedding similarity + GBM + A/B infrastructure."
+  - id: T33
+    md5: 011284bd62d6438cbd38d88c58e76291
+    count: 57
+    preview: "Built and operated production ML pipelines using MLflow for experiment tracking, Kubeflow for orches"
+    categories: {}
+    shipped: false
+    rationale: "MLOps for churn model"
+  - id: T34
+    md5: 4cf33c13e38e06918f2c0a9bc4620af1
+    count: 12
+    preview: "Fine-tuned LLaMA-2-7B and Mistral-7B variants using LoRA and QLoRA for domain-specific candidate-JD "
+    categories:
+      reco_search: 0.6
+      rank_eval: 0.8
+    shipped: true
+    rationale: "LoRA/QLoRA fine-tuning for candidate-JD matching with ranking-metric eval harness; matching domain but fine-tuning-centric."
+  - id: T35
+    md5: e05401ef0cee6007c72e3dd0458196a7
+    count: 12
+    preview: "Built a RAG-based ranking pipeline serving 50M+ queries per month for an internal recruiter-facing s"
+    categories:
+      retrieval: 1.0
+      rank_eval: 1.0
+      reco_search: 1.0
+      ltr: 0.8
+    shipped: true
+    rationale: "RAG ranking at 50M queries/mo: BM25+dense hybrid, LLM re-ranker with LTR fallback, NDCG/MRR framework. The strongest template in the corpus."
+  - id: T36
+    md5: 81c24b3e530650c26c4ce18f9e82e8af
+    count: 9
+    preview: "Built and shipped a production recommendation system at a marketplace product, going from offline ex"
+    categories:
+      reco_search: 1.0
+      retrieval: 0.8
+      rank_eval: 0.9
+      ltr: 0.5
+    shipped: true
+    rationale: "Marketplace reco shipped to A/B in 5 months: CF + TF-IDF + sentence-transformers; cold-start via Thompson sampling."
+  - id: T37
+    md5: cdc97d435c05650452ae23429d5d69d6
+    count: 9
+    preview: "Owned the end-to-end ranking pipeline at a recommendations-heavy consumer product: candidate sourcin"
+    categories:
+      retrieval: 1.0
+      rank_eval: 1.0
+      reco_search: 1.0
+      ltr: 1.0
+    shipped: true
+    rationale: "End-to-end ranking pipeline: BGE embeddings -> Pinecone -> XGBoost LTR -> behavioral signals; eval calibration over 18 months. All four categories explicit."
+  - id: T38
+    md5: 62ded4236d3792f833d071899892c534
+    count: 8
+    preview: "Owned the design and rollout of a large-scale semantic search system serving an internal corpus of 3"
+    categories:
+      retrieval: 1.0
+      rank_eval: 1.0
+      reco_search: 0.9
+    shipped: true
+    rationale: "Hybrid semantic search at 35M items; NDCG@10 +18%; embedding drift monitoring; led 4 engineers."
+  - id: T39
+    md5: de1ec9ceafb594f9cf82e7f5e7a45fe0
+    count: 8
+    preview: "Led the migration from keyword-based to embedding-based search across a 30M+ candidate corpus over 8"
+    categories:
+      retrieval: 1.0
+      rank_eval: 0.9
+      reco_search: 0.9
+    shipped: true
+    rationale: "Keyword->embedding search migration over 30M CANDIDATE corpus (recruiting domain) with A/B discipline."
+  - id: T40
+    md5: c4c676956911e5d96743f17ca514a912
+    count: 6
+    preview: "Built systems that understand what users are looking for and connect them to the most relevant match"
+    categories:
+      reco_search: 0.8
+      rank_eval: 0.6
+      retrieval: 0.4
+    shipped: true
+    rationale: "PURE PARAPHRASE - invisible to all regexes: 'systems that understand what users are looking for... matching layer... explicit modeling and evaluation'. Clearly relevance/matching work; confidence reduced for wording ambiguity."
+  - id: T41
+    md5: cd9954bdb587ecf93bcb4399bef25a21
+    count: 5
+    preview: "Shipped the personalization infrastructure: the system that learns from user behavior and improves r"
+    categories:
+      reco_search: 0.8
+      rank_eval: 0.9
+    shipped: true
+    rationale: "Personalization infrastructure with offline experimentation + online A/B framework."
+  - id: T42
+    md5: d9a88dcb225e49509f65a4cee34c0c5f
+    count: 5
+    preview: "Designed the ranking layer for the company's flagship product: how do we surface the right thing at "
+    categories:
+      reco_search: 0.9
+      rank_eval: 0.8
+      retrieval: 0.3
+    shipped: true
+    rationale: "PARAPHRASE: 'ranking layer... surface the right thing... evaluation framework' (the Phase 3 audit's #93 case)."
+  - id: T43
+    md5: 05f5c111e00fbe1fa24d9f6f1d014b17
+    count: 4
+    preview: "Owned the search and discovery experience end-to-end at a consumer product, from how content is repr"
+    categories:
+      reco_search: 0.9
+      rank_eval: 0.9
+      retrieval: 0.4
+    shipped: true
+    rationale: "Search & discovery end-to-end; offline metrics correlated with online engagement; relevance methodology."
+  - id: T44
+    md5: 24ee8fa9e30d77aa9d392095cab59eb9
+    count: 2
+    preview: "Led the engineering team building infrastructure to surface relevant content to users at scale. The "
+    categories:
+      reco_search: 0.8
+      retrieval: 0.5
+      rank_eval: 0.5
+    shipped: true
+    rationale: "PARAPHRASE: 'surface relevant content at scale... query understanding, ranking calibration'; team-lead flavor noted."

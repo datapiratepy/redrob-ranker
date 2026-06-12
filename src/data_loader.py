@@ -41,26 +41,33 @@ def _open_maybe_gzip(path: Path) -> IO[str]:
 def iter_candidates(
     path: str | Path | None = None,
     limit: int | None = None,
+    skip: int = 0,
 ) -> Iterator[Candidate]:
     """Stream candidates one record at a time.
 
     Parameters
     ----------
     path:  explicit path to the jsonl(.gz); resolved via config if None.
-    limit: stop after N records (useful for quick iteration in dev).
+    limit: yield at most N records (useful for quick iteration in dev).
+    skip:  skip the first N lines *without parsing them* — enables cheap
+           chunked processing of the 100K pool.
 
     Raises ``ValueError`` with the line number on malformed JSON — fail loud,
     a silently skipped record could hide a dataset bug.
     """
     resolved = resolve_candidates_path(path)
+    yielded = 0
     with _open_maybe_gzip(resolved) as f:
         for line_no, line in enumerate(f, start=1):
-            if limit is not None and line_no > limit:
+            if line_no <= skip:
+                continue
+            if limit is not None and yielded >= limit:
                 return
             if not line.strip():
                 continue
             try:
                 yield json.loads(line)
+                yielded += 1
             except json.JSONDecodeError as e:
                 raise ValueError(f"Malformed JSON on line {line_no}: {e}") from e
 

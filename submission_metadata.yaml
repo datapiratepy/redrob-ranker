@@ -1,0 +1,62 @@
+# Redrob Hackathon — submission metadata (mirror of portal entries)
+# ⚠️ TODO markers must be filled before submission.
+
+team_name: "TODO-your-team-name"
+
+primary_contact:
+  name: "Harsh Kamat"
+  email: "harshkamat.2307@gmail.com"
+  phone: "TODO-+91-XXXXXXXXXX"
+
+team_members:
+  - name: "Harsh Kamat"
+    email: "harshkamat.2307@gmail.com"
+    role: "ML Engineer (solo)"
+
+github_repo: "TODO-https://github.com/USERNAME/redrob-ranker"
+sandbox_link: "TODO-https://huggingface.co/spaces/USERNAME/redrob-ranker"  # see README §Sandbox
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "TODO e.g. Windows 11 laptop"
+  cpu_cores: 0          # TODO
+  ram_gb: 16            # TODO confirm
+  python_version: "TODO e.g. 3.11.x"
+  os: "TODO e.g. Windows 11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false   # template table is config, not a computed artifact
+  pre_computation_time_minutes: 0
+
+ai_tools_used:
+  - "Claude"
+
+ai_usage_summary: |
+  Used Claude (Cowork) as a pair-engineering assistant across all phases:
+  EDA scripting, scoring-component drafting, investigation probes, and
+  documentation. All design decisions (signal weights, template confidence
+  values, penalty policies, hand labels) were reviewed and are owned by the
+  team. No candidate data was sent to any hosted LLM; the ranking pipeline
+  itself makes no model or API calls.
+
+methodology_summary: |
+  Interpretable feature-based ranker, no ML models at rank time. Recall:
+  union of title regex, career-text evidence, and corroboration-gated skills
+  (raw skill lists are the dataset's gamed surface). Scoring: career evidence
+  40% (via an exhaustive 44-template classification table discovered in EDA —
+  every stint description in the pool is one of 44 texts), title 20%,
+  corroborated skills 20%, experience and location 10% each; multiplicative
+  JD-rule penalties (consulting-only, short-stints, wrong-specialization) and
+  a behavioral availability multiplier with JD-anchored thresholds. Honeypots
+  are excluded by four career-math consistency checks (H1-H3, H6) that
+  identify ~80 planted profiles. Reasoning is generated from verified profile
+  facts only, with mechanical anti-hallucination checks. Validated against a
+  25-candidate hand-labeled evaluation set. Full run: ~60s CPU-only.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: false   # TODO: set true after running rank.py on your machine

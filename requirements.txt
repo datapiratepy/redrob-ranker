@@ -1,4 +1,5 @@
-# Phase 0 — deliberately minimal. ML dependencies arrive in Phase 6.
-numpy>=1.26
+# Runtime dependency of the ranking pipeline (rank.py):
 pyyaml>=6.0
+
+# Development / testing only:
 pytest>=8.0

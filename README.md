@@ -10,12 +10,12 @@ Senior AI Engineer JD, under challenge constraints (≤5 min wall-clock, CPU-onl
 |---|---|
 | 0 — Setup & data loading | ✅ done |
 | 1 — JD reverse engineering | ✅ done (`config/jd_signals.yaml`, `docs/phase1_jd_analysis.md`) |
-| 2 — Dataset exploration | ⬜ |
-| 3 — Baseline ranker | ⬜ |
-| 4 — Honeypot detection | ⬜ |
-| 5 — Reasoning engine | ⬜ |
-| 6 — Semantic layer | ⬜ |
-| 7 — Final ranking | ⬜ |
+| 2 — Dataset exploration | ✅ done (`docs/phase2_eda_findings.md`, `src/eda_scan.py`) |
+| 3 — Baseline ranker | ✅ done (`src/scoring.py`, `src/baseline_ranker.py`, `docs/phase3_baseline_design.md`) |
+| 4 — Honeypot detection | ✅ done (`docs/phase4_improvements.md` — H6 check, title fix, location split) |
+| 5 — Reasoning engine | ✅ done (`src/reasoning_engine.py`, `docs/phase5_reasoning_design.md`, `docs/sample_reasoning_output.md`) |
+| 6 — Semantic layer | ✅ investigated (`docs/phase6_semantic_investigation.md` — verdict: 44-template table, NOT embeddings) |
+| 7 — Final ranking | ✅ done (`config/template_evidence.yaml`, `docs/phase7_template_classification.md`, `docs/phase7_evaluation.md`, `outputs/updated_top100.csv`) |
 
 ## Setup (Windows)
 
@@ -62,8 +62,25 @@ redrob-ranker/
 └── requirements.txt
 ```
 
-## Reproduction (final — will be updated in Phase 7)
+## Reproduction (submission_spec.md §10.3)
 
 ```
-python rank.py --candidates ../candidates.jsonl --out ./submission.csv
+python rank.py --candidates ./candidates.jsonl --out ./submission.csv
 ```
+
+Two streaming passes, CPU-only, no network, no model artifacts. Measured ~60s on
+the full 100K pool (5-min budget: ~5× headroom). Deterministic — repeated runs
+produce a byte-identical CSV. Validate before upload:
+
+```
+python validate_submission.py submission.csv   # validator from the hackathon bundle
+```
+
+Phase 8 addendum: hopper penalty ×0.75 → ×0.85 (see `docs/phase8_hopper_analysis.md`).
+Final pre-submission audit: `docs/final_submission_audit.md`.
+
+## Sandbox (required by §10.5 — not yet deployed)
+
+Plan: a minimal Streamlit/Gradio app on HuggingFace Spaces wrapping `rank.py`
+for a ≤100-candidate upload → ranked CSV download. The repo's two-pass pipeline
+already handles small inputs (top-N = min(100, recalled)).
