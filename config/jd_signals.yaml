@@ -1,0 +1,233 @@
+# ============================================================================
+# Phase 1 — JD Reverse Engineering
+# Machine-readable extraction of every ranking-relevant signal in
+# job_description.md. This file is the contract the Phase 3 baseline ranker
+# will consume. No weights here — weights are a Phase 3 decision.
+#
+# severity meanings:
+#   hard_filter : JD says "we will not move forward" — exclude or near-zero
+#   strong      : decisive positive/negative
+#   moderate    : meaningful modifier
+#   mild        : tiebreak-level
+# ============================================================================
+
+role:
+  title: "Senior AI Engineer — Founding Team"
+  company_stage: "Series A startup"
+  domain: "talent intelligence / recruiting tech"
+  location_base: ["Pune", "Noida"]
+
+# ----------------------------------------------------------------------------
+# POSITIVE SIGNALS
+# ----------------------------------------------------------------------------
+positive_signals:
+
+  must_have:   # "Things you absolutely need"
+    - id: embeddings_retrieval_production
+      severity: strong
+      description: >
+        Production experience with embeddings-based retrieval deployed to real
+        users. Model-agnostic — operational experience is what counts.
+      evidence_keywords:   # for matching against skills + career_history text
+        [embedding, embeddings, sentence-transformers, retrieval, semantic search,
+         dense retrieval, BGE, E5, vector search, recommendation system, recommender]
+
+    - id: vector_db_or_hybrid_search
+      severity: strong
+      description: "Production experience with vector DBs or hybrid search infra."
+      evidence_keywords:
+        [pinecone, weaviate, qdrant, milvus, opensearch, elasticsearch, faiss,
+         solr, vespa, hybrid search, bm25, lucene]
+
+    - id: strong_python
+      severity: strong
+      description: "Strong Python; code quality matters; this role writes code."
+      evidence_keywords: [python]
+
+    - id: ranking_evaluation_frameworks
+      severity: strong
+      description: "Designed evaluation for ranking systems: NDCG, MRR, MAP, A/B."
+      evidence_keywords:
+        [ndcg, mrr, mean average precision, a/b test, ab test, offline evaluation,
+         ranking metrics, evaluation framework, search quality, relevance]
+
+  nice_to_have:   # "won't reject you for" — boosts only
+    - id: llm_finetuning
+      severity: mild
+      evidence_keywords: [lora, qlora, peft, fine-tuning, fine tuning, finetuning]
+    - id: learning_to_rank
+      severity: moderate
+      evidence_keywords: [learning to rank, ltr, xgboost, lambdamart, lambdarank]
+    - id: hrtech_marketplace_domain
+      severity: moderate
+      evidence_keywords: [recruiting, hr tech, hrtech, talent, marketplace, job portal, ats]
+    - id: distributed_systems_inference
+      severity: mild
+      evidence_keywords: [distributed systems, inference optimization, latency, scale, throughput]
+    - id: open_source_contributions
+      severity: mild
+      note: "Also signaled by redrob_signals.github_activity_score"
+
+  ideal_profile:   # "How to read between the lines"
+    total_experience_years: {sweet_spot: [6, 8], acceptable: [5, 9], flexible: true}
+    applied_ml_years: {target: [4, 5]}
+    company_type: "product companies, not pure services"
+    shipped_end_to_end: "at least one ranking/search/recommendation system at meaningful scale"
+    note: >
+      JD explicitly allows out-of-band experience "if other signals are strong"
+      — the 5-9 band must be a soft curve, not a hard gate.
+
+# ----------------------------------------------------------------------------
+# NEGATIVE SIGNALS
+# ----------------------------------------------------------------------------
+negative_signals:
+
+  hard_disqualifiers:   # "we will not move forward"
+    - id: pure_research_career
+      description: "Entire career in academic/research-only roles, zero production deployment."
+      detection_hint: "All career_history titles/descriptions are research/academic; no shipping language."
+
+    - id: langchain_only_ai_experience
+      description: >
+        AI experience is only recent (<12 months) LangChain/OpenAI-wrapper work,
+        with no substantial pre-LLM ML production history.
+      detection_hint: "AI-ish skills all with short duration_months; career text only mentions LLM-wrapper work."
+
+    - id: no_recent_production_code
+      description: "Hasn't written production code in 18+ months (moved to pure architecture/management)."
+      detection_hint: "Current title is Architect/Head/Director/VP-flavored with no hands-on language."
+
+  strong_negatives:   # "Things we explicitly do NOT want"
+    - id: title_chaser
+      severity: strong
+      description: "Company-hopping every ~1.5 years chasing Senior→Staff→Principal."
+      detection_hint: "career_history: many stints with duration_months < ~20 and ascending title ladder."
+
+    - id: framework_enthusiast
+      severity: moderate
+      description: "Identity built on hot-framework demos rather than systems."
+      detection_hint: "Skills/summary dominated by langchain/llamaindex/autogen-style tooling, thin fundamentals."
+
+    - id: consulting_firms_only
+      severity: strong
+      description: "ENTIRE career at consulting/services firms. Prior product-company experience neutralizes this."
+      consulting_companies:
+        [TCS, Tata Consultancy, Infosys, Wipro, Accenture, Cognizant, Capgemini,
+         HCL, Tech Mahindra, Mindtree, LTI, Mphasis, Deloitte, IBM Global Services]
+      neutralized_by: "any product-company stint in career_history"
+
+    - id: wrong_specialization
+      severity: strong
+      description: "Primary expertise CV/speech/robotics without significant NLP/IR exposure."
+      detection_hint: "computer vision/speech/robotics keywords dominate; no NLP/retrieval/search evidence."
+
+    - id: closed_source_no_external_validation
+      severity: mild
+      description: "5+ years proprietary-only work, no papers/talks/OSS."
+      detection_hint: "github_activity_score == -1 AND no OSS/publication language; treat gently — weak evidence."
+
+  trap_patterns:   # from the JD's hackathon note + sample_submission demo
+    - id: keyword_stuffer
+      description: >
+        Perfect AI keyword list, wrong actual role. "A candidate who has all the
+        AI keywords listed as skills but whose title is 'Marketing Manager' is
+        not a fit, no matter how perfect their skill list looks."
+      detection_hint: >
+        Non-technical current_title + many AI skills; skills lacking endorsements,
+        duration_months, or matching skill_assessment_scores; career text that
+        never mentions the claimed skills.
+    - id: plain_language_tier5   # the inverse trap: a TOP candidate we must not miss
+      description: >
+        "A Tier 5 candidate may not use the words 'RAG' or 'Pinecone'... if their
+        career history shows they built a recommendation system at a product
+        company, they're a fit." Career_history TEXT outranks the skills array.
+
+# ----------------------------------------------------------------------------
+# BEHAVIORAL SIGNALS (JD directives mapped to redrob_signals fields)
+# ----------------------------------------------------------------------------
+behavioral_signals:
+  jd_directive: >
+    "A perfect-on-paper candidate who hasn't logged in for 6 months and has a 5%
+    recruiter response rate is, for hiring purposes, not actually available.
+    Down-weight them appropriately." Signals act as a MODIFIER on fit, not as fit.
+
+  availability:   # the two the JD names explicitly
+    - field: last_active_date
+      direction: recent_is_good
+      jd_anchor: "6 months inactive ≈ not available"
+    - field: recruiter_response_rate
+      direction: higher_is_good
+      jd_anchor: "5% response rate ≈ not available"
+    - field: open_to_work_flag
+      direction: true_is_good
+      jd_anchor: "'Active on Redrob platform (or clear signal of being in the job market)'"
+    - field: applications_submitted_30d
+      direction: higher_is_mildly_good
+      note: "job-market activity signal"
+
+  reliability:
+    - field: interview_completion_rate
+      direction: higher_is_good
+    - field: offer_acceptance_rate
+      direction: higher_is_good
+      caveat: "-1 means no offer history — neutral, NOT bad"
+    - field: avg_response_time_hours
+      direction: lower_is_good
+
+  logistics:
+    - field: notice_period_days
+      jd_anchor: "sub-30 loved; can buy out up to 30; 30+ = 'bar gets higher' (penalty, not exclusion)"
+    - field: preferred_work_mode
+      jd_anchor: "hybrid Pune/Noida; remote-only preference is a friction signal, role is flexible-hybrid"
+    - field: willing_to_relocate
+      jd_anchor: "relevant only when candidate is outside Pune/Noida/NCR"
+
+  trust_and_validation:
+    - field: github_activity_score
+      jd_anchor: "external validation / OSS valued; -1 = no GitHub (neutral-to-mild-negative)"
+    - field: skill_assessment_scores
+      use: "verify claimed skills — assessment-backed skills are trustworthy; key anti-stuffer signal"
+    - field: verified_email
+      severity: mild
+    - field: verified_phone
+      severity: mild
+    - field: linkedin_connected
+      severity: mild
+
+  demand_side_caution:   # popularity ≠ fit; use sparingly
+    - field: profile_views_received_30d
+    - field: saved_by_recruiters_30d
+    - field: search_appearance_30d
+      note: "These reflect recruiter attention to keywords — the same thing stuffers game. Low trust."
+
+# ----------------------------------------------------------------------------
+# LOCATION
+# ----------------------------------------------------------------------------
+location:
+  preferred: [Pune, Noida]
+  welcome: [Hyderabad, Mumbai, Delhi, "Delhi NCR", Gurgaon, Gurugram, Ghaziabad, Bangalore, Bengaluru]
+  # JD names Hyderabad/Pune/Mumbai/Delhi NCR as "welcome to apply"; Bangalore is a
+  # reasonable tier-1 inclusion given "relocation candidates from Tier-1 Indian cities".
+  country_rule: "India strongly preferred; outside India case-by-case, NO visa sponsorship"
+  relocation: "willing_to_relocate=true partially compensates non-preferred location"
+
+# ----------------------------------------------------------------------------
+# HIDDEN HIRING PREFERENCES (read between the lines)
+# ----------------------------------------------------------------------------
+hidden_preferences:
+  - id: shipper_over_researcher
+    insight: "'We'd rather you tilt slightly toward shipper than researcher' — between two equals, prefer product-shipping evidence over papers."
+  - id: precision_over_recall
+    insight: "'We'd rather see 10 great matches than 1000 maybes' — they expect few true fits in 100K; our top-10 must be conservative and defensible. Maps directly to NDCG@10 = 50% of score."
+  - id: career_text_over_skills_array
+    insight: "Every trap in the dataset games the skills array. The JD consistently reasons from career HISTORY. Evidence hierarchy: career_history text > assessments/endorsements > raw skill names."
+  - id: commitment_intent
+    insight: "'Plans to be here 3+ years' — short-stint pattern is a culture flag, not just a title-chaser flag."
+  - id: writing_culture
+    insight: "'Async-first, write a lot' — articulate profile summaries are a weak positive proxy."
+  - id: pre_llm_fundamentals
+    insight: "'Understood retrieval and ranking before it became fashionable' — ML/search experience predating ~2022 is a strong authenticity signal."
+  - id: opinionated_seniority
+    insight: "'Strong opinions ... can defend them with reference to systems they actually built' — leadership/ownership language in career descriptions is a senior-signal."
+  - id: startup_adaptability
+    insight: "Big-tech-only careers wanting scoped roles are warned off; early-stage/startup company sizes (1-200) are a mild positive context signal."
