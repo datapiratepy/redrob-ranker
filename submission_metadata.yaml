@@ -13,8 +13,8 @@ team_members:
     email: "harshkamat.2307@gmail.com"
     role: "ML Engineer (solo)"
 
-github_repo: "TODO-https://github.com/USERNAME/redrob-ranker"
-sandbox_link: "TODO-https://huggingface.co/spaces/USERNAME/redrob-ranker"  # see README §Sandbox
+github_repo: "https://github.com/datapiratepy/redrob-ranker"
+sandbox_link: "https://colab.research.google.com/github/datapiratepy/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb"
 
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
 
