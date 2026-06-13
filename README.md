@@ -81,7 +81,7 @@ Final pre-submission audit: `docs/final_submission_audit.md`.
 
 ## Sandbox (§10.5)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/datapiratepy/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb)
 
 **Notebook:** `notebooks/redrob_ranker_sandbox.ipynb`
 
@@ -93,6 +93,6 @@ top-10 table + score chart → validator → CSV download.
 
 Runtime on Colab CPU: < 60 seconds.
 
-**To publish:** replace `YOUR_USERNAME` in the badge URL above and in
+**To publish:** replace `datapiratepy` in the badge URL above and in
 `submission_metadata.yaml` with your GitHub username. See `docs/sandbox_setup.md`
 for the complete checklist.
