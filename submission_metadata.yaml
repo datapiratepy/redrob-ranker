@@ -1,12 +1,11 @@
 # Redrob Hackathon — submission metadata (mirror of portal entries)
-# ⚠️ TODO markers must be filled before submission.
 
-team_name: "TODO-your-team-name"
+team_name: "Proxima One"
 
 primary_contact:
   name: "Harsh Kamat"
   email: "harshkamat.2307@gmail.com"
-  phone: "TODO-+91-XXXXXXXXXX"
+  phone: "+91-8660843889"
 
 team_members:
   - name: "Harsh Kamat"
@@ -19,11 +18,11 @@ sandbox_link: "https://colab.research.google.com/github/datapiratepy/redrob-rank
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
 
 compute:
-  platform: "TODO e.g. Windows 11 laptop"
-  cpu_cores: 0          # TODO
-  ram_gb: 16            # TODO confirm
-  python_version: "TODO e.g. 3.11.x"
-  os: "TODO e.g. Windows 11"
+  platform: "Windows 11 laptop"
+  cpu_cores: 12          
+  ram_gb: 16            
+  python_version: "3.14.6"
+  os: "Microsoft Windows 11 Home Single Language"
   uses_gpu_for_inference: false
   has_network_during_ranking: false
   pre_computation_required: false   # template table is config, not a computed artifact
@@ -59,4 +58,4 @@ declarations:
   code_is_original_work: true
   no_collusion: true
   honeypot_check_done: true
-  reproduction_tested: false   # TODO: set true after running rank.py on your machine
+  reproduction_tested: true
