@@ -16,6 +16,7 @@ Senior AI Engineer JD, under challenge constraints (≤5 min wall-clock, CPU-onl
 | 5 — Reasoning engine | ✅ done (`src/reasoning_engine.py`, `docs/phase5_reasoning_design.md`, `docs/sample_reasoning_output.md`) |
 | 6 — Semantic layer | ✅ investigated (`docs/phase6_semantic_investigation.md` — verdict: 44-template table, NOT embeddings) |
 | 7 — Final ranking | ✅ done (`config/template_evidence.yaml`, `docs/phase7_template_classification.md`, `docs/phase7_evaluation.md`, `outputs/updated_top100.csv`) |
+| 8 — Hopper penalty investigation | ✅ done (`docs/phase8_hopper_analysis.md` — penalty ×0.75 → ×0.85; final re-rank + reasoning regeneration) |
 
 ## Setup (Windows)
 
@@ -48,17 +49,30 @@ pytest tests/ -q
 ```
 redrob-ranker/
 ├── config/
-│   └── jd_signals.yaml      # Phase 1: machine-readable JD signal extraction
-├── docs/
-│   └── phase1_jd_analysis.md
-├── notebooks/               # EDA notebooks (Phase 2)
+│   ├── jd_signals.yaml          # Phase 1: machine-readable JD signal extraction
+│   └── template_evidence.yaml   # Phase 7: 44-template career-evidence table
+├── data/
+│   └── sample_candidates.json   # 50-candidate sample for the Colab sandbox
+├── docs/                        # phase design docs + audit trail
+│   ├── phase1_jd_analysis.md … phase8_hopper_analysis.md
+│   ├── final_submission_audit.md
+│   └── sandbox_setup.md
+├── notebooks/
+│   └── redrob_ranker_sandbox.ipynb   # Colab sandbox (§10.5)
 ├── src/
-│   ├── config.py            # paths + constants, single source of truth
-│   ├── data_loader.py       # streaming JSONL loader
-│   └── inspect_dataset.py   # structural verification CLI
+│   ├── config.py                # paths + constants, single source of truth
+│   ├── data_loader.py           # streaming JSONL loader (gzip-transparent)
+│   ├── scoring.py               # five-component interpretable scorer
+│   ├── template_evidence.py     # md5-keyed 44-template career-evidence lookup
+│   ├── reasoning_engine.py      # fact-grounded, hallucination-checked reasoning
+│   └── baseline_ranker.py       # chunked ranker CLI + explain mode
 ├── tests/
 │   └── test_data_loader.py
-├── outputs/                 # generated artifacts (gitignored)
+├── outputs/                     # generated artifacts (gitignored except final CSV)
+│   └── updated_top100.csv       # final submission candidate
+├── rank.py                      # single-command reproduction entry point (§10.3)
+├── validate_submission.py        # official hackathon validator
+├── submission_metadata.yaml
 └── requirements.txt
 ```
 
@@ -93,6 +107,4 @@ top-10 table + score chart → validator → CSV download.
 
 Runtime on Colab CPU: < 60 seconds.
 
-**To publish:** replace `datapiratepy` in the badge URL above and in
-`submission_metadata.yaml` with your GitHub username. See `docs/sandbox_setup.md`
-for the complete checklist.
+The Colab notebook provides a reproducible CPU-only demonstration of the ranking pipeline on the provided sample dataset.

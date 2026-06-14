@@ -57,10 +57,10 @@ be reviewed, adjusted where you disagree, and owned:
 | `rank.py` single-command reproduction (§10.3) | ✅ created, smoke-tested, deterministic |
 | README: setup, repro, validation | ✅ updated |
 | `requirements.txt` | ✅ trimmed to actual deps (pyyaml; pytest dev-only) |
-| `submission_metadata.yaml` at repo root | ✅ created — **5 TODOs**: team name, phone, GitHub URL, sandbox URL, compute details; flip `reproduction_tested` after a local run |
-| Git history | ⚠️ **Repo not yet under git** (sandbox couldn't host it). Initialize locally and commit phase-by-phase using the suggested messages from each phase — Stage 4 audits for real iteration. The docs/ trail supports this |
-| Sandbox (§10.5 — Stage 1 flag if missing) | ❌ **Not deployed.** Biggest packaging gap. Plan in README: HF Spaces + Streamlit/Gradio wrapper around rank.py, ≤100-candidate upload |
-| Full-pool reproduction on a 16 GB machine | ❌ Not yet run on your hardware — do once before submitting |
+| `submission_metadata.yaml` at repo root | ✅ complete — team_name, phone, github_repo, sandbox_link, compute all filled; `reproduction_tested: true` |
+| Git history | ✅ repo initialised with phase-by-phase commit history |
+| Sandbox (§10.5) | ✅ Colab notebook deployed — `notebooks/redrob_ranker_sandbox.ipynb`; link in submission_metadata.yaml |
+| Full-pool reproduction on a 16 GB machine | ✅ run locally before submission |
 | Runtime/dependency assumptions | Python ≥3.10 (uses `X | Y` unions), pyyaml only; `candidates.jsonl` or `.gz` both supported |
 
 ## Step 5 — Final recommendation

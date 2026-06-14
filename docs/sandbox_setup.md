@@ -1,66 +1,31 @@
 # Sandbox Setup Guide
 
-How to publish the Colab notebook and obtain a shareable link for the
-hackathon submission portal (Submission Spec §10.5).
+Documents the Colab sandbox built for Submission Spec §10.5.
+
+**Status: complete.** The sandbox is live at the link below.
 
 ---
 
-## Prerequisites
+## Sandbox link
 
-- GitHub repository pushed and **public** (required for Colab to open it)
-- `sample_candidates.json` in the repo under `data/sample_candidates.json`
-  OR committed to a publicly accessible path
-
----
-
-## One-time setup (do this before submitting)
-
-### 1. Add sample data to the repo
-
-Copy the hackathon bundle's `sample_candidates.json` into the repo so Colab
-can fetch it without a manual upload:
-
-```bat
-cd redrob-ranker
-mkdir data
-copy ..\sample_candidates.json data\sample_candidates.json
-git add data/sample_candidates.json
-git commit -m "add sample data for Colab sandbox"
-git push
+```
+https://colab.research.google.com/github/datapiratepy/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb
 ```
 
-### 2. Update the two placeholders in the notebook
+The README badge links to the same URL.
 
-Open `notebooks/redrob_ranker_sandbox.ipynb` and replace:
+---
 
-| Placeholder | Replace with |
+## Setup (completed)
+
+All one-time steps are done:
+
+| Step | Status |
 |---|---|
-| `https://github.com/YOUR_USERNAME/redrob-ranker.git` | Your actual GitHub clone URL |
-| `https://raw.githubusercontent.com/YOUR_USERNAME/redrob-ranker/main/data/sample_candidates.jsonl` | Raw URL to `data/sample_candidates.json` converted to JSONL — or just rely on the JSON conversion path which works automatically once the file is in the repo |
-
-Commit and push the updated notebook:
-
-```bat
-git add notebooks/redrob_ranker_sandbox.ipynb
-git commit -m "sandbox: set actual github url in colab notebook"
-git push
-```
-
-### 3. Fill the remaining TODOs in submission_metadata.yaml
-
-```yaml
-team_name: "your-team-name"
-primary_contact:
-  phone: "+91-XXXXXXXXXX"
-github_repo: "https://github.com/YOUR_USERNAME/redrob-ranker"
-sandbox_link: "https://colab.research.google.com/github/YOUR_USERNAME/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb"
-compute:
-  platform: "Windows 11 laptop"
-  cpu_cores: <your core count>
-  python_version: "3.11.x"
-  os: "Windows 11"
-reproduction_tested: true   # flip after running rank.py locally
-```
+| `data/sample_candidates.json` committed to repo | ✅ |
+| `GITHUB_URL` set to `https://github.com/datapiratepy/redrob-ranker.git` in notebook | ✅ |
+| `submission_metadata.yaml` fully filled (team, phone, URLs, compute, `reproduction_tested: true`) | ✅ |
+| Repo public on GitHub | ✅ |
 
 ---
 
@@ -72,23 +37,12 @@ deterministic URL — **no manual upload required**.
 **Your sandbox link will be:**
 
 ```
-https://colab.research.google.com/github/YOUR_USERNAME/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb
+https://colab.research.google.com/github/datapiratepy/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb
 ```
 
-Replace `YOUR_USERNAME` with your GitHub username. That's it — this URL is
-valid immediately once the repo is public and the notebook is committed.
+This URL is valid as long as the repo is public and the notebook is committed.
 
 > Tip: test it in an incognito window to confirm it opens without login.
-
-### Making the link "open in Colab" from the README
-
-Add this badge to `README.md`:
-
-```markdown
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb)
-```
-
----
 
 ## Running the sandbox end-to-end (verification checklist)
 
@@ -130,14 +84,3 @@ If you prefer not to commit `sample_candidates.json` to GitHub:
 
 The notebook is designed to handle both paths.
 
----
-
-## After publishing
-
-Update `submission_metadata.yaml`:
-
-```yaml
-sandbox_link: "https://colab.research.google.com/github/YOUR_USERNAME/redrob-ranker/blob/main/notebooks/redrob_ranker_sandbox.ipynb"
-```
-
-Commit and push. The sandbox requirement (§10.5) is now satisfied.
